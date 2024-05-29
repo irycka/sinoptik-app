@@ -59,7 +59,27 @@ function searchCity(city) {
   axios.get(apiUrl).then(refreshWeather);
 }
 
+function displayForecast() {
+  let forecast = document.querySelector("#forecast");
+
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  days.forEach(function (day) {
+    forecast.innerHTML = `<div class="weather-forecast-day">
+                        <div class="weather-forecast-date">Thu</div>
+                        <div class="weather-forecast-icon">🌞</div>
+                            <div class="weather-forecast-temperatures">
+                            <div class="weather-forecast-temperature">
+                            <strong>27°</strong>
+                            </div>
+                            <div class="weather-forecast-temperature">18°</div>
+                            </div>  
+                </div>`;
+  });
+}
+
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Kharkiv");
+displayForecast();
