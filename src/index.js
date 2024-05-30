@@ -44,6 +44,11 @@ function formatDate(date) {
 
   return `${day} ${hours}:${minutes}`;
 }
+function searchCity(city) {
+  let apiKey = "at4d96bda05b6f73380b5219of43773b";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(refreshWeather);
+}
 
 function handleSearchSubmit(event) {
   event.preventDefault();
@@ -53,29 +58,29 @@ function handleSearchSubmit(event) {
   searchCity(searchInput.value);
 }
 
-function searchCity(city) {
-  let apiKey = "at4d96bda05b6f73380b5219of43773b";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(refreshWeather);
-}
-
 function displayForecast() {
-  let forecast = document.querySelector("#forecast");
-
   let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtml = "";
 
   days.forEach(function (day) {
-    forecast.innerHTML = `<div class="weather-forecast-day">
-                        <div class="weather-forecast-date">Thu</div>
-                        <div class="weather-forecast-icon">🌞</div>
+    forecastHtml =
+      forecastHtml +
+      `
+     <div class="weather-forecast-day">
+                        <div class="weather-forecast-date">${day}</div>
+                        <div class="weather-forecast-icon">🌤️</div>
                             <div class="weather-forecast-temperatures">
                             <div class="weather-forecast-temperature">
                             <strong>27°</strong>
                             </div>
                             <div class="weather-forecast-temperature">18°</div>
                             </div>  
-                </div>`;
+                </div>
+                `;
   });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
 }
 
 let searchFormElement = document.querySelector("#search-form");
